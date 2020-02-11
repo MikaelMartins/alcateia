@@ -1,0 +1,123 @@
+window.Ajax = function(route, calltype, params = null) {
+    return new Promise(function(resolve, reject){
+
+    });
+}
+var count = 1;
+
+$(document).ready(function() {
+
+    if(count == 5) {
+        count = 4;
+    }
+
+  $("#ADD").click(function() {
+      var show = "#contact"+count;
+      $(show).show();
+      count ++;
+      return false;
+  });
+});
+
+$(document).ready(function() {
+
+    if(count == 0) {
+        count = 1;
+    }
+
+  $("#HIDE").click(function() {
+      var show = "#contact"+count;
+      $(show).hide();
+      count --;
+      return false;
+  });
+});
+
+//================= cadastrar ===================
+
+$(document).ready(function(e) {
+    
+    $("#cad").on('click', function(e) {
+        e.preventDefault();
+
+        let action = 0;
+        let name = $("#nome").val();
+        let mail = $("#email").val();
+        let contact = $("#contact").val();
+        let contac1 = $("#contact1").val();
+        let contac2 = $("#contact2").val();
+        let contac3 = $("#contact3").val();
+
+
+        $.ajax({
+            url: '/add/' + name + '/' + mail + '/' + contact + '/' + action,
+            type: 'POST',
+            dataType: "json",
+            contentType: "application/json",
+            cache: false,
+            timeout: 5000,
+
+            success: function (result) {
+                if ($.isEmptyObject(result))
+                console.log('Ocorreu um erro');
+                else
+                    console.log("Parametros recebidos pelo servidor");
+            },
+
+            error: function (err) {
+                console.log(err);
+            },
+        });
+    });
+});
+
+//====================== Lista de Clientes =============================
+
+var link = '/list';
+
+$(document).ready(function(){
+	$('#itens').empty();
+	$.ajax({
+		type:'post',
+		dataType: 'json',
+		url: link,
+		success: function(dados){
+			for(var i=0;dados.length>i;i++){
+				$('#itens').append('<tr><td scope="row"><button type="submit" id="EDIT" class="btn btn-primary"><i class="fa fa-edit"></i></button> <button type="submit" onclick="del('+dados[i].id+')" id="DELETE" class="btn btn-danger"><i class="fa fa-trash"></i></button></td><td>'+dados[i].name+'</td><td>'+dados[i].mail+'</td><td>'+dados[i].contact+'</td></tr>');
+			}
+		}
+    });
+    
+});
+
+
+//========================== DELETE ==============================================
+
+function del(id) {
+
+    $(document).ready(function(){
+        let action = 1;
+
+        $.ajax({
+            url: '/del/' + id + '/' + action,
+            type: 'POST',
+            dataType: "json",
+            contentType: "application/json",
+
+            success: function (result) {
+                if ($.isEmptyObject(result))
+                console.log('Ocorreu um erro');
+                else
+                    console.log("Parametro recebidos pelo servidor");
+            },
+
+            error: function (err) {
+                console.log(err);
+            },
+        });
+
+    });
+    location.reload();
+    
+}
+

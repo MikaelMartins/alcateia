@@ -1,0 +1,25 @@
+{
+  "name": "client_alcateia",
+  "version": "1.0.0",
+  "description": "cadastro de clientes em uma tabela simples",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo 'error in file';"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikaelMartins/alcateia.git"
+  },
+  "author": "Mikael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikaelMartins/alcateia/issues"
+  },
+  "homepage": "https://github.com/MikaelMartins/alcateia#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "jquery": "^3.4.1",
+    "mssql": "^6.0.1"
+  }
+}
