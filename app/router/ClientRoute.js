@@ -1,6 +1,10 @@
+//========== requisições =================
+
 var express = require('express');
 var router = express.Router();
 var mssql = require('mssql');
+
+//========== Rotas GET ===================
 
 router.get('/', function(req, res) {
 
@@ -22,6 +26,7 @@ router.get('/salvo', function(req, res) {
 	
 });
 
+//=============== LISTA DE TODOS OS CLIENTES =======================================
 
 router.post('/list', function(req, res) {
 	var request = new mssql.Request();
@@ -36,6 +41,7 @@ router.post('/list', function(req, res) {
 	});
 });
 
+//=============== LISTA COM PARAMETRO ID =============================================
 
 router.post('/list/edit/:id', function(req, res) {
 	var request = new mssql.Request();
@@ -53,7 +59,7 @@ router.post('/list/edit/:id', function(req, res) {
 });
 
 
-//===================== cadastro ====================================
+//===================== CADASTRO ====================================
 
 router.post('/add/:name/:mail/:contact/:action', function(req, res) {
 	
@@ -78,7 +84,7 @@ router.post('/add/:name/:mail/:contact/:action', function(req, res) {
 
 });
 
-//=============================== extra ==================================================
+//==================== CADASTRO DE CONTATOS ADICIONAIS ===============================================
 
 
 router.post('/add/:contact/:action', function(req, res) {
@@ -127,7 +133,7 @@ router.post('/del/:id/:action', function(req, res) {
 
 //================================ EDITAR ====================================
 
-router.post('/edit/:id/:name/:mail/:contact/:action', function(req, res) {
+router.post('/edit/:clientId/:name/:mail/:contact/:action', function(req, res) {
 	
 	var mssql_request = new mssql.Request();
 
@@ -135,7 +141,7 @@ router.post('/edit/:id/:name/:mail/:contact/:action', function(req, res) {
 	mssql_request.input('name', mssql.Text, req.params.name);
 	mssql_request.input('mail', mssql.Text, req.params.mail);
 	mssql_request.input('contact', mssql.Text, req.params.contact);
-	mssql_request.input('id', mssql.Int, req.params.id);
+	mssql_request.input('id', mssql.Int, req.params.clientId);
 	mssql_request.execute('dbo.StoredController').then(function(dataset) {
 		if(dataset && dataset.recordsets && dataset.recordsets.length > 0)
 		{

@@ -1,11 +1,6 @@
 //////GLOBAL PATCH
 global.basedir = __dirname;
 
-
-const { Connection, Request } = require("tedious");
-
-
-
 const express = require('express');
 const http = require('http');
 const mssql = require('mssql');

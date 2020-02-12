@@ -3,6 +3,9 @@ window.Ajax = function(route, calltype, params = null) {
 
     });
 }
+
+//====== FUNCIONALIDADES =================================
+
 var count = 1;
 
 $(document).ready(function() {
@@ -33,7 +36,7 @@ $(document).ready(function() {
   });
 });
 
-//================= cadastrar ===================
+//============= CADASTRAR ======================================
 
 $(document).ready(function(e) {
     
@@ -74,7 +77,7 @@ $(document).ready(function(e) {
 });
 
 
-//====================== contastos extras ============================
+//====================== CONTATOS ADICIONAIS ============================
 
 function tellAdd(x) {
     
@@ -111,7 +114,7 @@ function tellAdd(x) {
 }
 
 
-//====================== Lista de Clientes =============================
+//====================== Lista de Clientes ============================
 
 var id = 20;
 
@@ -123,7 +126,6 @@ $(document).ready(function(){
 		dataType: 'json',
 		url: '/list',
 		success: function(dados){
-
 			for(var i=0;dados.length>i;i++){
 				$('#itens').append('<tr><td scope="row"><button type="submit" onclick="edit('+dados[i].id+')"  id="EDIT" class="btn btn-primary"><i class="fa fa-edit"></i></button> <button type="submit" onclick="del('+dados[i].id+')" id="DELETE" class="btn btn-danger"><i class="fa fa-trash"></i></button></td><td>'+dados[i].name+'</td><td>'+dados[i].mail+'</td><td>'+dados[i].contact+'</td></tr>');
 			}
@@ -136,12 +138,55 @@ $(document).ready(function(){
 		dataType: 'json',
 		url: '/list/edit/'+ id,
 		success: function(dados){
-			$('#item').append('<tr><td scope="row"><button type="submit"  id="EDIT" class="btn btn-primary"><i class="fa fa-edit"></i></button> <button type="submit" id="DELETE" class="btn btn-danger"><i class="fa fa-trash"></i></button></td><td>'+dados[0].name+'</td><td>'+dados[0].mail+'</td><td>'+dados[0].contact+'</td></tr>');
+            $('#item').append('<tr><td scope="row"><button type="submit" onclick="update('+dados[0].id+')"  id="SAVE" class="btn btn-primary">Salvar</button> <button type="submit" id="CLOSE" class="btn btn-danger">Cancelar</button></td><td><input type="text" class="form-control" id="name" value="'+dados[0].name+'"></td><td><input type="text" class="form-control" id="mail" value="'+dados[0].mail+'"></td><td><input type="text" class="form-control" id="contato" value="'+dados[0].contact+'"></td></tr>');
 		}
     });
 
     
 });
+
+//================== ALTERAR ======================================
+
+function update(clientId) {
+
+$(document).ready(function(e) {
+    
+    $("#SAVE").on('click', function(e) {
+        e.preventDefault();
+
+        let action = 2;
+        let name = $("#name").val();
+        let mail = $("#mail").val();
+        let contact = $("#contato").val();
+
+        $.ajax({
+            url: '/edit/' + clientId + '/' + name + '/' + mail + '/' + contact + '/' + action,
+            type: 'POST',
+            dataType: "json",
+            contentType: "application/json",
+            cache: false,
+            timeout: 5000,
+
+            success: function (result) {
+                if ($.isEmptyObject(result))
+                console.log('Ocorreu um erro');
+                else
+                    console.log("Parametros recebidos pelo servidor");
+            },
+
+            error: function (err) {
+                console.log(err);
+            },
+        });
+
+
+        if(count > 1) {
+            tellAdd(count);
+        }
+
+    });
+});
+}
 
 
 //========================== DELETE ==============================================
@@ -178,7 +223,8 @@ function del(id) {
 
 function edit(i) {
 
-  //this.id = 20;
+    //id = 21;
 
     window.location.href = "/editar";
+    console.log(id);
 }
