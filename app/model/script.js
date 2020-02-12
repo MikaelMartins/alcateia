@@ -10,28 +10,27 @@ var count = 1;
 
 $(document).ready(function() {
 
-    if(count == 5) {
-        count = 4;
-    }
-
   $("#ADD").click(function() {
       var show = "#contact"+count;
       $(show).show();
       count ++;
+      if(count == 4) {
+        count = 3;
+    }
       return false;
   });
 });
 
 $(document).ready(function() {
 
-    if(count == 0) {
-        count = 1;
-    }
-
   $("#HIDE").click(function() {
       var show = "#contact"+count;
       $(show).hide();
       count --;
+
+      if(count == 0) {
+        count = 1;
+    }
       return false;
   });
 });
@@ -83,7 +82,7 @@ function tellAdd(x) {
     
     $(document).ready(function(e) {
 
-        for(var i=1; i < x; i++) {
+        for(var i=0; i <= x; i++) {
 
         let action = 3;
         var tell = "#contact"+i;
@@ -116,7 +115,7 @@ function tellAdd(x) {
 
 //====================== Lista de Clientes ============================
 
-var id = 20;
+var id = [20];
 
 $(document).ready(function(){
 
@@ -138,7 +137,7 @@ $(document).ready(function(){
 		dataType: 'json',
 		url: '/list/edit/'+ id,
 		success: function(dados){
-            $('#item').append('<tr><td scope="row"><button type="submit" onclick="update('+dados[0].id+')"  id="SAVE" class="btn btn-primary">Salvar</button> <button type="submit" id="CLOSE" class="btn btn-danger">Cancelar</button></td><td><input type="text" class="form-control" id="name" value="'+dados[0].name+'"></td><td><input type="text" class="form-control" id="mail" value="'+dados[0].mail+'"></td><td><input type="text" class="form-control" id="contato" value="'+dados[0].contact+'"></td></tr>');
+            $('#item').append('<tr><td scope="row"><button type="submit" onclick="update('+dados[0].id+')"  id="SAVE" class="btn btn-primary">Salvar</button> <a href="/" id="CLOSE" class="btn btn-danger">Cancelar</a></td><td><input type="text" class="form-control" id="name" value="'+dados[0].name+'"></td><td><input type="text" class="form-control" id="mail" value="'+dados[0].mail+'"></td><td><input type="text" class="form-control" id="contato" value="'+dados[0].contact+'"></td></tr>');
 		}
     });
 
@@ -223,8 +222,7 @@ function del(id) {
 
 function edit(i) {
 
-    //id = 21;
-
     window.location.href = "/editar";
     console.log(id);
+
 }
