@@ -115,10 +115,9 @@ function tellAdd(x) {
 
 //====================== Lista de Clientes ============================
 
-var id = [20];
 
 $(document).ready(function(){
-
+    
 	$('#itens').empty();
 	$.ajax({
 		type:'post',
@@ -135,7 +134,7 @@ $(document).ready(function(){
     $.ajax({
 		type:'post',
 		dataType: 'json',
-		url: '/list/edit/'+ id,
+		url: '/list/edit/'+ localStorage.getItem("id"),
 		success: function(dados){
             $('#item').append('<tr><td scope="row"><button type="submit" onclick="update('+dados[0].id+')"  id="SAVE" class="btn btn-primary">Salvar</button> <a href="/" id="CLOSE" class="btn btn-danger">Cancelar</a></td><td><input type="text" class="form-control" id="name" value="'+dados[0].name+'"></td><td><input type="text" class="form-control" id="mail" value="'+dados[0].mail+'"></td><td><input type="text" class="form-control" id="contato" value="'+dados[0].contact+'"></td></tr>');
 		}
@@ -222,7 +221,9 @@ function del(id) {
 
 function edit(i) {
 
+    localStorage.setItem("id", i);
+
     window.location.href = "/editar";
-    console.log(id);
+    //console.log(id);
 
 }
