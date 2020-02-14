@@ -1,6 +1,5 @@
 window.Ajax = function(route, calltype, params = null) {
     return new Promise(function(resolve, reject){
-
     });
 }
 
@@ -9,37 +8,40 @@ window.Ajax = function(route, calltype, params = null) {
 var count = 1;
 
 $(document).ready(function() {
+      $("#ADD").click(function() {
+        var show = "#contact"+count;
+        $(show).show();
+        count ++;
+        if(count == 4) 
+        {
+            count = 3;
+        }
+        return false;
+    });
 
-  $("#ADD").click(function() {
-      var show = "#contact"+count;
-      $(show).show();
-      count ++;
-      if(count == 4) {
-        count = 3;
-    }
-      return false;
-  });
-});
+    $("#HIDE").click(function() {
 
-$(document).ready(function() {
+        var show = "#contact"+count;
+        $(show).hide();
+        count --;
 
-  $("#HIDE").click(function() {
-      var show = "#contact"+count;
-      $(show).hide();
-      count --;
-
-      if(count == 0) {
-        count = 1;
-    }
-      return false;
-  });
-});
+        if(count == 0)
+        {
+            count = 1;
+        }
+        return false;
+    });
 
 //============= CADASTRAR ======================================
 
-$(document).ready(function(e) {
-    
     $("#cad").on('click', function(e) {
+        if($("#nome").val() === "" || $("#email").val() === "" || $("#contact").val() === "") 
+        {
+            $(".alertErr").slideDown("slow");
+        } else
+        {
+            $(".alertSuc").slideDown("slow");
+        }
         e.preventDefault();
 
         let action = 0;
@@ -57,9 +59,13 @@ $(document).ready(function(e) {
 
             success: function (result) {
                 if ($.isEmptyObject(result))
-                console.log('Ocorreu um erro');
+                {
+                    console.log('Ocorreu um erro');
+                }
                 else
+                {
                     console.log("Parametros recebidos pelo servidor");
+                }
             },
 
             error: function (err) {
@@ -73,14 +79,10 @@ $(document).ready(function(e) {
         }
 
     });
-});
-
 
 //====================== CONTATOS ADICIONAIS ============================
 
 function tellAdd(x) {
-    
-    $(document).ready(function(e) {
 
         for(var i=0; i <= x; i++) {
 
@@ -98,9 +100,13 @@ function tellAdd(x) {
 
             success: function (result) {
                 if ($.isEmptyObject(result))
-                console.log('Ocorreu um erro');
+                {
+                    console.log('Ocorreu um erro');
+                }
                 else
+                {
                     console.log("Parametros recebidos pelo servidor");
+                }
             },
 
             error: function (err) {
@@ -108,15 +114,11 @@ function tellAdd(x) {
             },
         });
     }
-});
 
 }
 
 
 //====================== Lista de Clientes ============================
-
-
-$(document).ready(function(){
     
 	$('#itens').empty();
 	$.ajax({
@@ -150,6 +152,13 @@ function update(clientId) {
 $(document).ready(function(e) {
     
     $("#SAVE").on('click', function(e) {
+        if($("#name").val() === "" || $("#mail").val() === "" || $("#contato").val() === "") 
+        {
+            $(".alertErr").slideDown("slow");
+        } else
+        {
+            $(".alertSuc").slideDown("slow");
+        }
         e.preventDefault();
 
         let action = 2;
@@ -212,8 +221,9 @@ function del(id) {
             },
         });
 
-    });
+    
     location.reload();
+    });
     
 }
 
@@ -222,8 +232,6 @@ function del(id) {
 function edit(i) {
 
     localStorage.setItem("id", i);
-
     window.location.href = "/editar";
-    //console.log(id);
 
 }

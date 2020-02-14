@@ -13,7 +13,7 @@
         }
     </style>
 
-    <script src="/salvo"></script>
+    <script src="/script"></script>
 
 
 <title>Formulario de cadastro</title>
@@ -30,24 +30,36 @@
           </form>-->
         </div>
       </nav>
+      <div style="display: none;" class="alert alertSuc alert-success alert-dismissible fade show top" role="alert">
+        <strong>Cliente</strong> Cadastrado com sucesso!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div style="display: none;" class="alert alertErr alert-danger alert-dismissible fade show top" role="alert">
+        <strong>Atenção</strong> Os campos Nome, E-mail e Contato são obrigatórios!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <form>
         <div class="form-row col-md-12 top">
             <div class="col-md-6">
           <div class="form-group col-md-9">
             <label for="nomeL">Nome</label>
-            <input type="text" class="form-control" id="nome" placeholder="Digite seu nome...">
+            <input required type="text" class="form-control" id="nome" placeholder="Digite seu nome...">
           </div>
         </div>
           <div class="col-md-6">
           <div class="form-group col-md-9">
             <label for="emailL">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="Digite seu E-mail...">
+            <input required type="email" class="form-control" id="email" placeholder="Digite seu E-mail...">
           </div>
         </div>
         <div class="col-md-3">
             <div class="form-group col-md-12">
               <label for="contactL">Telefone</label>
-              <input type="text" class="form-control" id="contact" placeholder="Digite seu telefone...">
+              <input required type="text" class="form-control" id="contact" placeholder="Digite seu telefone...">
               <input type="text" class="form-control top" style="display: none;" id="contact1" placeholder="Digite seu telefone...">
               <input type="text" class="form-control top" style="display: none;" id="contact2" placeholder="Digite seu telefone...">
               <input type="text" class="form-control top" style="display: none;" id="contact3" placeholder="Digite seu telefone...">

@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(patch.join(basedir, 'app')));
 
-
 var dbConfig = {
     server: 'localhost',
     port: 1433,
@@ -46,10 +45,12 @@ var dbConfig = {
 }
 
 mssql.connect(dbConfig).then(pool => {
-    if (pool.connecting) {
+    if (pool.connecting) 
+    {
         console.log("Conectando com a base de dados..");
     }
-    if (pool.connected) {
+    if (pool.connected) 
+    {
         server.listen(port, () => {
             console.log('Servidor conectado com a base de dados pela porta %d', port);
         });
@@ -64,10 +65,12 @@ function normalizePort (val) {
 
     const port = parseInt(val, 10); // converte val para int em decimal
 
-    if(isNaN(val)) {
+    if(isNaN(val)) 
+    {
         return port;
     }
-    if (port >= 0) {
+    if (port >= 0) 
+    {
         return port;
     }
     return false;
