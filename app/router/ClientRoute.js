@@ -10,6 +10,7 @@ var controller = require('../controller/clientController');
 router.get('/', controller.get);
 router.get('/cadastrar', controller.getCad);
 router.get('/editar', controller.getUp);
+router.get('/style', controller.getStyle);
 router.get('/script', controller.getScript);
 
 //=============== ROTAS POST =======================================

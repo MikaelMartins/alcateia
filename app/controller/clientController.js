@@ -17,6 +17,10 @@ exports.getScript = (req, res, next) => {
     res.sendFile(global.basedir + "/src/assets/js/script.js");
 }
 
+exports.getStyle = (req, res, next) => {
+    res.sendFile(global.basedir + "/src/assets/css/style.css");
+}
+
 exports.post = model.client;
 exports.postEditList = model.editList;
 exports.postCad = model.cadClient;
